@@ -90,6 +90,8 @@ public class Cliente implements Serializable {
     private String senha;
     @Column(name = "cliAtivo")
     private Boolean cliAtivo;
+    @Column(name = "admin")
+    private Boolean admin;
     
 
     public Integer getID() {
@@ -259,6 +261,20 @@ public class Cliente implements Serializable {
      */
     public void setCliAtivo(Boolean cliAtivo) {
         this.cliAtivo = cliAtivo;
+    }
+
+    /**
+     * @return the admin
+     */
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    /**
+     * @param admin the admin to set
+     */
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
     
 }

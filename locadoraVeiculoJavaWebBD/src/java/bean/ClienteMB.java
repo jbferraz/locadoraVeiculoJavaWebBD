@@ -43,7 +43,7 @@ public class ClienteMB implements Serializable{
     }
     public String novoCliente(){
         clienteSelecionado = new Cliente();
-        return("/formularioCadastro");//revisar
+        return("formularioClienteCadastro");
     }
     
     public String adicionarCliente(){
@@ -51,14 +51,14 @@ public class ClienteMB implements Serializable{
         return(this.novoCliente());
     }
     
-    public String editarClienter(Cliente c){
+    public String editarCliente(Cliente c){
         clienteSelecionado = c;
-        return("/formularioEdicao");//revisar        
+        return("formularioClienteEdicao");        
     }
     
     public String atualizarCliente(){
         clienteFacade.edit(clienteSelecionado);
-        return("/index");//revisar
+        return("listaClientes");
     }
     
     public void removerCliente(Cliente cliente){
