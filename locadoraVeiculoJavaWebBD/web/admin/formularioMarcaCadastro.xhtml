@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Cadastrar Marca</title>
+    </h:head>
+    <h:body>
+        <title>Cadastrar Marca</title>
+        <h:form prependId="false" class="form-horizontal">
+            <h:panelGrid >
+                <h:outputLabel for="nomeMarca" value="Marca:"/>
+                <h:inputText id="nomeMarca" value="#{marcaMB.marcaSelecionado.nomeMarca}" />
+
+                <h:outputLabel for="marcaAtivo" value="Ativo:"/>
+                <div class="col-sm-3">
+                    <h:selectBooleanCheckbox id="marcaAtivo" value="#{marcaMB.marcaSelecionado.marcaAtiva}" styleClass="checkbox"/> 
+                </div>
+
+                <br></br>
+                <h:commandButton value="Cadastrar" action="#{marcaMB.adicionarMarca()}"/>
+                <br></br>
+                <h:button value="Voltar" outcome="listaMarcas"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

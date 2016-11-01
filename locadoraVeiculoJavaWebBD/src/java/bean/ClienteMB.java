@@ -24,7 +24,7 @@ public class ClienteMB implements Serializable{
     @Inject
     private ClienteFacade clienteFacade;
     /**
-     * Creates a new instance of AndarMB
+     * Creates a new instance of ClienteMB
      */
     public ClienteMB() {
         clienteSelecionado = new Cliente();
