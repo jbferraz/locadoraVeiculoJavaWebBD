@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastrar Cliente</title>
+    </h:head>
+    <h:body>
+        <h1>Cadsatro de Cliente</h1>
+        <h:form>
+            <h:panelGrid >
+                <h:outputLabel for="nomeCliente" value="Nome Cliente:"/>
+                <h:inputText id="nomeCliente" value="#{clienteMB.clienteSelecionado.nomeCliente}" />
+
+                <h:outputLabel for="CPF" value="CPF:"/>
+                <h:inputText id="CPF" value="#{clienteMB.clienteSelecionado.CPF}" />
+                
+                <h:outputLabel for="endereco" value="Endereco:"/>
+                <h:inputText id="endereco" value="#{clienteMB.clienteSelecionado.endereco}" />
+                
+                <h:outputLabel for="celular" value="Celular:"/>
+                <h:inputText id="celular" value="#{clienteMB.clienteSelecionado.celular}" />
+                
+                <h:outputLabel for="telefone" value="Telefone:"/>
+                <h:inputText id="telefone" value="#{clienteMB.clienteSelecionado.telefone}" />
+                
+                <h:outputLabel for="email" value="e-mail:"/>
+                <h:inputText id="email" value="#{clienteMB.clienteSelecionado.email}" />
+                
+                <h:outputLabel value="Data Nascimento:" for="dataNascimento" />
+                    <h:inputText id="dataNascimento" value="#{clienteMB.clienteSelecionado.dataNascimento}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                
+                <h:outputLabel for="sexo" value="Sexo:"/>
+                <h:inputText id="sexo" value="#{clienteMB.clienteSelecionado.sexo}" />
+                
+                <h:outputLabel for="login" value="Login:"/>
+                <h:inputText id="login" value="#{clienteMB.clienteSelecionado.login}" />
+                
+                <h:outputLabel for="senha" value="Senha:"/>
+                <h:inputText id="senha" value="#{clienteMB.clienteSelecionado.senha}" />
+                
+                <h:outputLabel for="cliAtivo" value="Cliente Ativo:"/>
+                <h:inputText id="cliAtivo" value="#{clienteMB.clienteSelecionado.cliAtivo}" />
+                
+                <br></br>
+                <h:commandButton value="Cadastrar" action="#{clienteMB.adicionarCliente()}"/>
+                <br></br>
+                <h:button value="Voltar" outcome="listar"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
