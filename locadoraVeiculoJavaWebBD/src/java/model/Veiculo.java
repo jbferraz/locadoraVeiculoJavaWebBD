@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -83,12 +81,19 @@ public class Veiculo implements Serializable{
     @NotNull
     @Column(name = "veicAtivo")
     private Boolean veicAtivo;
-    @JoinColumn(referencedColumnName = "idCatVeiculo")
+    @JoinColumn(name="IDCATVEICULO_idCatVeiculo", referencedColumnName = "idCatVeiculo")
     @ManyToOne(optional = false)
     private CategoriaVeiculo idCatVeiculo;
-    @JoinColumn(referencedColumnName = "idMarca")
+    @JoinColumn(name="IDMARCA_idMarca", referencedColumnName = "idMarca")
     @ManyToOne(optional = false)
     private Marca idMarca;
+
+    public Veiculo() {
+    }
+
+    public Veiculo(Integer idVeiculo) {
+        this.idVeiculo = idVeiculo;
+    }
 
     /**
      * @return the idVeiculo
@@ -270,6 +275,11 @@ public class Veiculo implements Serializable{
      */
     public void setIdMarca(Marca idMarca) {
         this.idMarca = idMarca;
+    }
+
+    @Override
+    public String toString() {
+        return idVeiculo + modelo + ano + portas + placa;
     }
     
 }

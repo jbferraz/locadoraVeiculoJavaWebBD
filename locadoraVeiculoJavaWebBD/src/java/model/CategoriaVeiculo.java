@@ -6,16 +6,20 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,6 +48,8 @@ public class CategoriaVeiculo implements Serializable{
     private String descCatVeiculo;
     @Column(name = "catAtivo")
     private Boolean catAtivo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCatVeiculo")
+    private Collection<Veiculo> veiculoCollection;
 
     /**
      * @return the idCatVeiculo
@@ -86,7 +92,19 @@ public class CategoriaVeiculo implements Serializable{
     public void setCatAtivo(Boolean catAtivo) {
         this.catAtivo = catAtivo;
     }
+
+    @XmlTransient
+    public Collection<Veiculo> getVeiculoCollection() {
+        return veiculoCollection;
+    }
+
+    public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
+        this.veiculoCollection = veiculoCollection;
+    }
     
-    
+    @Override
+    public String toString() {
+        return idCatVeiculo + " - " + descCatVeiculo;
+    }
     
 }

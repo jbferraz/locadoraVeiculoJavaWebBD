@@ -276,5 +276,10 @@ public class Cliente implements Serializable {
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
+
+    @Override
+    public String toString() {
+        return idcliente + nomeCliente + CPF;
+    }
     
 }

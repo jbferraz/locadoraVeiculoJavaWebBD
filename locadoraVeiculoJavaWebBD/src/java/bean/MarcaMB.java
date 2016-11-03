@@ -5,9 +5,11 @@
  */
 package bean;
 
+import bean.util.beanUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.Marca;
@@ -68,5 +70,9 @@ public class MarcaMB implements Serializable{
     
     public void removerMarca(Marca m){
         marcaFacade.remove(m);
+    }
+    
+    public SelectItem[] getItemsAvailableSelectOne() {
+        return beanUtil.getSelectItems(marcaFacade.findAll(), true);
     }
 }

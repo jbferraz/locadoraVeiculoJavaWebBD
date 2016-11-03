@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Lista Veiculos</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="table-responsive">
+                <h:dataTable var="veiculo" value="#{veiculoMB.listaVeiculo}" styleClass="table">
+                    <f:facet name="header">
+                        <h:outputText value="Tabela de Veiculos" />
+                    </f:facet>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Veiculo" />
+                        </f:facet>
+                        <h:outputText id="idVeiculo" value="#{veiculo.idVeiculo}"  />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Marca" />
+                        </f:facet>
+                        <h:outputText id="idMarca" value="#{veiculo.idMarca}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Modelo" />
+                        </f:facet>
+                        <h:outputText id="modelo" value="#{veiculo.modelo}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Categoria" />
+                        </f:facet>
+                        <h:outputText id="idCatVeiculo" value="#{veiculo.idCatVeiculo}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ano" />
+                        </f:facet>
+                        <h:outputText id="ano" value="#{veiculo.ano}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cor" />
+                        </f:facet>
+                        <h:outputText id="cor" value="#{veiculo.cor}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Portas" />
+                        </f:facet>
+                        <h:outputText id="portas" value="#{veiculo.portas}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Opcionais" />
+                        </f:facet>
+                        <h:outputText id="opcionais" value="#{veiculo.opcionais}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Placa" />
+                        </f:facet>
+                        <h:outputText id="placa" value="#{veiculo.placa}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Valor KM Livre" />
+                        </f:facet>
+                        <h:outputText id="valorLivre" value="#{veiculo.valorLivre}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Valor KM" />
+                        </f:facet>
+                        <h:outputText id="valorKm" value="#{veiculo.valorKm}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Disponivel" />
+                        </f:facet>
+                        <h:outputText id="disponivel" value="#{veiculo.disponivel}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ativo" />
+                        </f:facet>
+                        <h:outputText id="veicAtivo" value="#{veiculo.veicAtivo}" />
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">
+                            <span>
+                                <h:outputText value="Operação" />
+                            </span>
+                        </f:facet>
+                        <div class="btn-group">
+                            <h:commandButton value="Editar "  class="btn btn-default" action="#{veiculoMB.editarVeiculo(veiculo)}" />
+                            <h:commandButton value="Remover" class="btn btn-default" action="#{veiculoMB.removerVeiculo(veiculo)}"/>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+                <br />
+                <h:button value="Cadastrar Veiculo" outcome="formularioVeiculoCadastro"/>
+                <br />
+                <br />
+                <h:button value="Voltar" outcome="/index.xhtml"/>
+                <br />
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

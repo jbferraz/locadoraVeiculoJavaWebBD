@@ -8,6 +8,7 @@ package model.session;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import model.Marca;
 
 /**
@@ -26,5 +27,13 @@ public class MarcaFacade extends AbstractFacade<Marca>{
 
     public MarcaFacade() {
         super(Marca.class);
+    }
+    
+    public Marca buscarPorNomeMarca(String nome){
+        String jpql = "select m from Marca m where m.nomeMarca=:nome";
+        TypedQuery<Marca> query = em.createQuery(jpql,Marca.class);
+        query.setParameter ("nome",nome);
+        Marca m = query.getSingleResult();
+        return m;
     }
 }
