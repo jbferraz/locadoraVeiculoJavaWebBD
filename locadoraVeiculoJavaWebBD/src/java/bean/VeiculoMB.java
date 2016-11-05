@@ -10,8 +10,10 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import model.CategoriaVeiculo;
 import model.Marca;
 import model.Veiculo;
+import model.session.CategoriaVeiculoFacade;
 import model.session.VeiculoFacade;
 import model.session.MarcaFacade;
 
@@ -27,6 +29,8 @@ public class VeiculoMB implements Serializable{
     private VeiculoFacade veiculoFacade;
     @Inject
     private MarcaFacade marcaFacade;
+    @Inject
+    private CategoriaVeiculoFacade catVeicFacade;
 
     public VeiculoMB(){
         veiculoSelecionado = new Veiculo();
@@ -52,6 +56,10 @@ public class VeiculoMB implements Serializable{
     
     public List<Marca> getListaMarca(){
         return marcaFacade.findAll();
+    }
+    
+    public List<CategoriaVeiculo> getListaCatVeiculo(){
+        return catVeicFacade.findAll();
     }
 
     public String novoVeiculo(){
@@ -80,5 +88,9 @@ public class VeiculoMB implements Serializable{
 
     public Marca buscarMarcaPorNome(String nome) {
         return marcaFacade.buscarPorNomeMarca(nome);
+    }
+    
+    public CategoriaVeiculo buscarCatVeicPorDesc(String desc) {
+        return catVeicFacade.buscarPorDescCatVeiculo(desc);
     }
 }

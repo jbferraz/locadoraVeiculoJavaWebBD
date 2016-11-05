@@ -8,6 +8,7 @@ package model.session;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import model.CategoriaVeiculo;
 
 /**
@@ -26,5 +27,13 @@ public class CategoriaVeiculoFacade extends AbstractFacade<CategoriaVeiculo>{
 
     public CategoriaVeiculoFacade() {
         super(CategoriaVeiculo.class);
+    }
+    
+    public CategoriaVeiculo buscarPorDescCatVeiculo(String descCatVeiculo){
+        String jpql = "select c from CategoriaVeiculo c where c.descCatVeiculo=:descCatVeiculo";
+        TypedQuery<CategoriaVeiculo> query = em.createQuery(jpql,CategoriaVeiculo.class);
+        query.setParameter ("descCatVeiculo",descCatVeiculo);
+        CategoriaVeiculo c = query.getSingleResult();
+        return c;
     }
 }

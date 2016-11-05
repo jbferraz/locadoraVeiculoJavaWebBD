@@ -4,10 +4,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Cadastrar Veiculo</title>
+        <title>Editar Veiculo</title>
     </h:head>
     <h:body>
-        <title>Cadastrar Veiculo</title>
+        <title>Editar Veiculo</title>
         <h:form prependId="false" class="form-horizontal">
             <h:panelGrid >
                 <h:outputLabel for="idMarca" value="Marca:"/>
@@ -63,7 +63,7 @@
                 </div>
 
                 <br></br>
-                <h:commandButton value="Cadastrar" action="#{veiculoMB.adicionarVeiculo()}"/>
+                <h:commandButton value="Atualizar" action="#{veiculoMB.atualizarVeiculo()}"/>
                 <br></br>
                 <h:button value="Voltar" outcome="listaVeiculos"/>
             </h:panelGrid>

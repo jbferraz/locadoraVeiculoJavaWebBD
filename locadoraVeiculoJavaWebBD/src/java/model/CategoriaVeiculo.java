@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -100,6 +101,24 @@ public class CategoriaVeiculo implements Serializable{
 
     public void setVeiculoCollection(Collection<Veiculo> veiculoCollection) {
         this.veiculoCollection = veiculoCollection;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CategoriaVeiculo other = (CategoriaVeiculo) obj;
+        if (!Objects.equals(this.idCatVeiculo, other.idCatVeiculo)) {
+            return false;
+        }
+        return true;
     }
     
     @Override
