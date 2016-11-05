@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -98,6 +99,24 @@ public class Marca implements Serializable{
 
     public void setMarcaCollection(Collection<Veiculo> marcaCollection) {
         this.marcaCollection = marcaCollection;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Marca other = (Marca) obj;
+        if (!Objects.equals(this.idMarca, other.idMarca)) {
+            return false;
+        }
+        return true;
     }
     
     @Override
