@@ -91,7 +91,7 @@ public class Cliente implements Serializable {
     @Column(name = "cliAtivo")
     private Boolean cliAtivo;
     @Column(name = "adm")
-    private Boolean admin;
+    private Boolean adm;
     
 
     public Integer getID() {
@@ -264,17 +264,17 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * @return the admin
+     * @return the adm
      */
-    public Boolean getAdmin() {
-        return admin;
+    public Boolean getAdm() {
+        return adm;
     }
 
     /**
-     * @param admin the admin to set
+     * @param adm the adm to set
      */
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setAdm(Boolean adm) {
+        this.adm = adm;
     }
 
     @Override
@@ -283,16 +283,21 @@ public class Cliente implements Serializable {
     }
     
      public boolean isAdmin() {
-        return admin;
+        return adm;
     }
     
+     public String getCliAtivoString(){
+        if(cliAtivo) return "SIM";
+        else return "NAO";
+    }
+     
     public String getAdminString(){
-        if(admin) return "SIM";
+        if(adm) return "SIM";
         else return "NAO";
     }
 
     public void setAdmin(boolean admin) {
-        this.admin = admin;
+        this.adm = admin;
     }
     
     public boolean verificaLogin(String login, String senha){
