@@ -67,97 +67,99 @@
                         </div>
                     </div>
                 </nav>
+            </h:form>
+            <h:form>
                 <div class="table-responsive">
                     <h:dataTable var="cliente" value="#{clienteMB.listaCliente}" styleClass="table">
-                    <f:facet name="header">
-                        <h:outputText value="Tabela de Clientes" />
-                    </f:facet>
-                    <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Id Cliente" />
+                            <h:outputText value="Tabela de Clientes" />
                         </f:facet>
-                        <h:outputText id="idCliente" value="#{cliente.idcliente}"  />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nome" />
-                        </f:facet>
-                        <h:outputText id="nome" value="#{cliente.nomeCliente}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="CPF" />
-                        </f:facet>
-                        <h:outputText id="CPF" value="#{cliente.CPF}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Endereço" />
-                        </f:facet>
-                        <h:outputText  id="endereco" value="#{cliente.endereco}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Celular" />
-                        </f:facet>
-                        <h:outputText id="celular" value="#{cliente.celular}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Telefone" />
-                        </f:facet>
-                        <h:outputText  id="telefone" value="#{cliente.telefone}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="e-mail" />
-                        </f:facet>
-                        <h:outputText  id="email" value="#{cliente.email}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Dt Nasc." />
-                        </f:facet>
-                        <h:outputText  id="dtNasc" value="#{cliente.dataNascimento}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Sexo" />
-                        </f:facet>
-                        <h:outputText  id="sexo" value="#{cliente.sexo}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Login" />
-                        </f:facet>
-                        <h:outputText  id="login" value="#{cliente.login}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Ativo" />
-                        </f:facet>
-                        <h:outputText  id="ativo" value="#{cliente.cliAtivoString}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Admin" />
-                        </f:facet>
-                        <h:outputText  id="admin" value="#{cliente.adminString}" />
-                        <!--REVISAR-->
-                    </h:column>
-                    <h:column >
-                        <f:facet name="header">
-                            <span>
-                                <h:outputText value="Operação" />
-                            </span>
-                        </f:facet>
-                        <div class="btn-group">
-                            <h:commandButton value="Editar "  class="btn btn-default" action="#{clienteMB.editarCliente(cliente)}" />
-                            <h:commandButton value="Remover" class="btn btn-default" action="#{clienteMB.removerCliente(cliente)}"/>
-                        </div>
-                    </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id Cliente" />
+                            </f:facet>
+                            <h:outputText id="idCliente" value="#{cliente.idcliente}"  />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nome" />
+                            </f:facet>
+                            <h:outputText id="nome" value="#{cliente.nomeCliente}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CPF" />
+                            </f:facet>
+                            <h:outputText id="CPF" value="#{cliente.CPF}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Endereço" />
+                            </f:facet>
+                            <h:outputText  id="endereco" value="#{cliente.endereco}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Celular" />
+                            </f:facet>
+                            <h:outputText id="celular" value="#{cliente.celular}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Telefone" />
+                            </f:facet>
+                            <h:outputText  id="telefone" value="#{cliente.telefone}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="e-mail" />
+                            </f:facet>
+                            <h:outputText  id="email" value="#{cliente.email}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dt Nasc." />
+                            </f:facet>
+                            <h:outputText  id="dtNasc" value="#{cliente.dataNascimento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sexo" />
+                            </f:facet>
+                            <h:outputText  id="sexo" value="#{cliente.sexo}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Login" />
+                            </f:facet>
+                            <h:outputText  id="login" value="#{cliente.login}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ativo" />
+                            </f:facet>
+                            <h:outputText  id="ativo" value="#{cliente.cliAtivoString}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Admin" />
+                            </f:facet>
+                            <h:outputText  id="admin" value="#{cliente.adminString}" />
+                            <!--REVISAR-->
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">
+                                <span>
+                                    <h:outputText value="Operação" />
+                                </span>
+                            </f:facet>
+                            <div class="btn-group">
+                                <h:commandButton value="Editar "  class="btn btn-default" action="#{clienteMB.editarCliente(cliente)}" />
+                                <h:commandButton value="Remover" class="btn btn-default" action="#{clienteMB.removerCliente(cliente)}"/>
+                            </div>
+                        </h:column>
                     </h:dataTable>
                 </div>
                 <br/><br/>
