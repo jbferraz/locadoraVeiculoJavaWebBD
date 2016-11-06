@@ -64,7 +64,7 @@ public class VeiculoMB implements Serializable{
 
     public String novoVeiculo(){
         veiculoSelecionado = new Veiculo();
-        return ("formularioVeiculoCadastro");
+        return ("/admin/formularioVeiculoCadastro?faces-redirect=true");
     }
     
     public String adicionarVeiculo(){
@@ -74,12 +74,12 @@ public class VeiculoMB implements Serializable{
     
     public String editarVeiculo(Veiculo v){
         veiculoSelecionado = v;
-        return ("formularioVeiculoEdicao");
+        return ("/admin/formularioVeiculoEdicao?faces-redirect=true");
     }
     
     public String atualizarVeiculo(){
         veiculoFacade.edit(veiculoSelecionado);
-        return ("listaVeiculos");
+        return ("/admin/listaVeiculos?faces-redirect=true");
     }
     
     public void removerVeiculo(Veiculo v){

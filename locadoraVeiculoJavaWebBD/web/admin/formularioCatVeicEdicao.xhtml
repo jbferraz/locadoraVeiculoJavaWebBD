@@ -1,28 +1,97 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Editar Cat. Veiculo</title>
+        <title>Cadastro Categoria</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-        <h1>Editar Categoria de Veiculo</h1>
-        <h:form prependId="false" class="form-horizontal">
-            <h:panelGrid >
-                <h:outputLabel for="descCatVeic" value="Descrição Cat. Veiculo:"/>
-                <h:inputText id="descCatVeic" value="#{categoriaVeiculoMB.catVeicSelecionado.descCatVeiculo}" />
-
-                <h:outputLabel for="catAtivo" value="Ativo:"/>
-                <div class="col-sm-3">
-                    <h:selectBooleanCheckbox id="catAtivo" value="#{categoriaVeiculoMB.catVeicSelecionado.catAtivo}" styleClass="checkbox"/> 
+        <div class="container-fluid">
+            <h:form  prependId="false" class="form-horizontal">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">LocaCar</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">        
+                                <li class="active"><h:commandLink value="Home" action="/admin/index?faces-redirect=true"/>
+                                </li>                                
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos"/></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><h:commandLink class="glyphicon glyphicon-log-in" value=" Logout" action="#{loginMB.realizaLogout()}"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </h:form>
+            <h:form prependId="false" class="form-horizontal">
+                <center>
+                    <h1>Editar Categoria</h1>
+                </center>
+                <div class="form-group">
+                    <h:outputLabel value="Descrição: " for="idDescCatVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:inputText value="#{categoriaVeiculoMB.catVeicSelecionado.descCatVeiculo}" id="idDescCatVeiculo"  styleClass="form-control"/> 
+                    </div>
                 </div>
-
-                <br></br>
-                <h:commandButton value="Atualizar" action="#{categoriaVeiculoMB.atualizarCatVeiculo()}"/>
-                <br></br>
-                <h:button value="Voltar" outcome="listaCatVeiculos"/>
-            </h:panelGrid>
-        </h:form>
+                <div class="form-group">
+                    <h:outputLabel value="Ativo: " for="idAtivo" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:selectBooleanCheckbox id="idAtivo" value="#{categoriaVeiculoMB.catVeicSelecionado.catAtivo}" styleClass="checkbox"/> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <h:commandButton value="Cadastrar" class="btn btn-default" action="#{categoriaVeiculoMB.atualizarCatVeiculo()}" />
+                        <td></td>
+                        <h:button value="Voltar" outcome="/admin/listaCatVeiculos?faces-redirect=true" class="btn btn-default"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
     </h:body>
 </html>
-

@@ -4,53 +4,115 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Lista Marcas</title>
+        <title>Cadastro</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-        <h:form>
-            <div class="table-responsive">
-                <h:dataTable var="marca" value="#{marcaMB.listaMarca}" styleClass="table">
-                    <f:facet name="header">
-                        <h:outputText value="Tabela de Marcas" />
-                    </f:facet>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id Marca" />
-                        </f:facet>
-                        <h:outputText id="idMarca" value="#{marca.idMarca}"  />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Marca" />
-                        </f:facet>
-                        <h:outputText id="nomeMarca" value="#{marca.nomeMarca}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Ativo" />
-                        </f:facet>
-                        <h:outputText id="ativo" value="#{marca.marcaAtiva}" />
-                    </h:column>
-                    <h:column >
-                        <f:facet name="header">
-                            <span>
-                                <h:outputText value="Operação" />
-                            </span>
-                        </f:facet>
-                        <div class="btn-group">
-                            <h:commandButton value="Editar "  class="btn btn-default" action="#{marcaMB.editarMarca(marca)}" />
-                            <h:commandButton value="Remover" class="btn btn-default" action="#{marcaMB.removerMarca(marca)}"/>
+        <div class="container-fluid">
+            <h:form  prependId="false" class="form-horizontal">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">LocaCar</a>
                         </div>
-                    </h:column>
-                </h:dataTable>
-                <br />
-                <h:button value="Cadastrar Marca" outcome="formularioMarcaCadastro"/>
-                <br />
-                <br />
-                <h:button value="Voltar" outcome="/index.xhtml"/>
-                <br />
-            </div>
-        </h:form>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">        
+                                <li class="active"><h:commandLink value="Home" action="/admin/index?faces-redirect=true"/>
+                                </li>                                
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
+                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><h:commandLink class="glyphicon glyphicon-log-in" value=" Logout" action="#{loginMB.realizaLogout()}"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </h:form>
+            <h:form prependId="false" class="form-horizontal">
+                <div class="table-responsive">
+                    <h:dataTable var="marca" value="#{marcaMB.listaMarca}" styleClass="table">
+                        <f:facet name="header">
+                            <h:outputText value="Tabela de Marcas" />
+                        </f:facet>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id Marca" />
+                            </f:facet>
+                            <h:outputText id="idMarca" value="#{marca.idMarca}"  />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca" />
+                            </f:facet>
+                            <h:outputText id="nomeMarca" value="#{marca.nomeMarca}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ativo" />
+                            </f:facet>
+                            <h:outputText id="ativo" value="#{marca.marcaAtiva}" />
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">
+                                <span>
+                                    <h:outputText value="Operação" />
+                                </span>
+                            </f:facet>
+                            <div class="btn-group">
+                                <h:commandButton value="Editar "  class="btn btn-default" action="#{marcaMB.editarMarca(marca)}" />
+                                <h:commandButton value="Remover" class="btn btn-default" action="#{marcaMB.removerMarca(marca)}"/>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                    <br />
+                    <h:commandButton value="Nova Marca" class="btn btn-default" action="#{marcaMB.novoMarca()}"/>
+                    <br />
+                    <br />
+                    <h:commandButton value="Voltar" class="btn btn-default" action="/admin/index?faces-redirect=true"/>
+                    <br />
+                </div>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

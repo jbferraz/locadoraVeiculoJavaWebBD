@@ -90,7 +90,7 @@ public class Cliente implements Serializable {
     private String senha;
     @Column(name = "cliAtivo")
     private Boolean cliAtivo;
-    @Column(name = "admin")
+    @Column(name = "adm")
     private Boolean admin;
     
 
@@ -280,6 +280,23 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return idcliente + nomeCliente + CPF;
+    }
+    
+     public boolean isAdmin() {
+        return admin;
+    }
+    
+    public String getAdminString(){
+        if(admin) return "SIM";
+        else return "NAO";
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+    
+    public boolean verificaLogin(String login, String senha){
+        return(this.login.equals(login) && this.senha.equals(senha));
     }
     
 }

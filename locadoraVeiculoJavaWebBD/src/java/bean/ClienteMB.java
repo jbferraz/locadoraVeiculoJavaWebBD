@@ -43,7 +43,7 @@ public class ClienteMB implements Serializable{
     }
     public String novoCliente(){
         clienteSelecionado = new Cliente();
-        return("formularioClienteCadastro");
+        return("/admin/formularioClienteCadastro?faces-redirect=true");
     }
     
     public String adicionarCliente(){
@@ -53,15 +53,16 @@ public class ClienteMB implements Serializable{
     
     public String editarCliente(Cliente c){
         clienteSelecionado = c;
-        return("formularioClienteEdicao");        
+        return("/admin/formularioClienteEdicao?faces-redirect=true");        
     }
     
     public String atualizarCliente(){
         clienteFacade.edit(clienteSelecionado);
-        return("listaClientes");
+        return("/admin/listaClientes?faces-redirect=true");
     }
     
     public void removerCliente(Cliente cliente){
         clienteFacade.remove(cliente);
     }
+    
 }
