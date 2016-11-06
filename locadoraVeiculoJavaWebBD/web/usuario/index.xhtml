@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Editar Veículo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <div class="container-fluid">
+            <h:form prependId="false" class="form-horizontal">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">LocaCar</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">        
+                                <li class="active"><h:commandLink value="Home" action="/usuario/index?faces-redirect=true"/>
+                                </li>                                
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:commandLink value="Listar" action="/usuario/listaLocacao?faces-redirect=true"/></li>
+                                        <li><h:commandLink value="Reserva" action="/usuario/listaReservado"/></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><h:commandLink class="glyphicon glyphicon-log-in" value=" Logout" action="#{loginMB.realizaLogout()}"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <h1>
+                    <h:outputText value="Seja bem vindo, #{loginMB.clienteLogado.nomeCliente}"/>
+                </h1>
+            </h:form>
+        </div>
+    </h:body>
+</html>
