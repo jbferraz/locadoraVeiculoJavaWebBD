@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>LocaCar</title>
+        <title>Cadastro</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -14,8 +14,8 @@
     </h:head>
     <h:body>
         <div class="container-fluid">
-            <h:form>
-                <nav class="navbar navbar-default">
+            <h:form  prependId="false" class="form-horizontal">
+               <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">        
-                                <li class="active"><h:commandLink value="Home" action="/admin/index?faces-redirect=true"/>
+                                <li class="active"><h:commandLink value="Home" action="/admin/index"/>
                                 </li>                                
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
@@ -68,34 +68,72 @@
                         </div>
                     </div>
                 </nav>
-                </h:form>
+           </h:form>
             <h:form prependId="false" class="form-horizontal">
                 <center>
-                    <h1>Cadastro Marca</h1>
+                    <h1>Cadastro Veículo</h1>
                 </center>
                 <div class="form-group">
-                    <h:outputLabel value="Marca: " for="idMarca" styleClass="control-label" class="control-label col-sm-2"/>
+                    <h:outputLabel value="Cliente: " for="idCliente" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:inputText value="#{marcaMB.marcaSelecionado.nomeMarca}" id="idMarca"  styleClass="form-control"/> 
+                        <h:inputText value="#{clienteMB.clienteSelecionado.idcliente}" id="idcliente"  styleClass="form-control"/> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Ativo: " for="idAtivo" styleClass="control-label" class="control-label col-sm-2"/>
+                    <h:outputLabel value="Veiculo: " for="idVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:selectBooleanCheckbox id="idAtivo" value="#{marcaMB.marcaSelecionado.marcaAtiva}" styleClass="checkbox"/> 
+                        <h:selectOneMenu id="idVeiculo" value="#{locacaoMB.locacaoSelecionado.idVeiculo}" styleClass="form-control">
+                            <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                            <f:selectItems value="#{locacaoMB.listaVeiculo}"
+                                           var="veiculo" itemValue="#{veiculo}"
+                                           itemLabel="#{veiculo.placa}"/>                    
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Data Locação: " for="dataLocacao" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:inputText value="#{locacaoMB.locacaoSelecionado.dataLocacao}" id="dataLocacao"  styleClass="form-control"/> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Data Retirada: " for="dataRetirada" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:inputText id="dataRetirada" value="#{locacaoMB.locacaoSelecionado.dataRetirada}"  styleClass="form-control"/> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Km Retirada: " for="kmRetirada" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:inputText id="kmRetirada" value="#{locacaoMB.locacaoSelecionado.kmRetirada}"  styleClass="form-control"/> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Km Livre: " for="kmLivre" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:inputText id="kmLivre" value="#{locacaoMB.locacaoSelecionado.kmLivre}"  styleClass="form-control"/> 
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h:outputLabel value="Status" for="status" styleClass="control-label" class="control-label col-sm-2"/>
+                    <div class="col-sm-3">
+                        <h:selectBooleanCheckbox  value="#{locacaoMB.locacaoSelecionado.status}"  styleClass="checkbox"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <p:commandButton value="Atualizar" class="btn btn-default" action="#{marcaMB.atualizarMarca()}" onclick="PF('dlg2').show(); " delay="1500" />
+                        <p:commandButton value="Cadastrar" class="btn btn-default" action="#{locacaoMB.adicionarLocacao()}" onclick="PF('dlg2').show();" delay="1500" />
                         <td></td>
-                        <p:button value="Voltar" outcome="/admin/listaMarcas?faces-redirect=true" class="btn btn-default"/>
+                        <p:button value="Voltar" outcome="/admin/listaLocacao?faces-required=true" class="btn btn-default"/>
                     </div>
                 </div>
-                <p:dialog header="Marca Alterada!" widgetVar="dlg2" modal="true" height="50" >
-                    <h:outputText value="Tipo: #{marcaMB.marcaSelecionado.nomeMarca}" />
+                <p:dialog header="Locação Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+                    <h:outputText value="Tipo: #{locacaoMB.locacaoSelecionado.idVeiculo.placa}" />
                 </p:dialog>
             </h:form>
         </div>
     </h:body>
 </html>
+
+

@@ -8,15 +8,14 @@ package model.session;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import model.Cliente;
+import model.Locacao;
 
 /**
  *
  * @author jairb
  */
 @Stateless
-public class ClienteFacade extends AbstractFacade<Cliente> {
+public class LocacaoFacade extends AbstractFacade<Locacao> {
 
     @PersistenceContext(unitName = "locadoraVeiculoJavaWebBDPU")
     private EntityManager em;
@@ -26,16 +25,8 @@ public class ClienteFacade extends AbstractFacade<Cliente> {
         return em;
     }
 
-    public ClienteFacade() {
-        super(Cliente.class);
-    }
-
-    public Cliente buscarPorNomeCliente(String nomeCliente) {
-        String jpql = "select c from Cliente c where c.nomeCliente=:nomeCliente";
-        TypedQuery<Cliente> query = em.createQuery(jpql,Cliente.class);
-        query.setParameter ("nomeCliente",nomeCliente);
-        Cliente c = query.getSingleResult();
-        return c;
+    public LocacaoFacade() {
+        super(Locacao.class);
     }
     
 }
