@@ -2,17 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
     <h:head>
         <title>Cadastro</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
-        <div class="container-fluid">
+        <div >
             <h:form prependId="false" class="form-horizontal">
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
@@ -109,11 +112,11 @@
                     </div>
                 </div>
                 <div class="form-group">
+
                     <h:outputLabel value="Data Nascimento:" for="dataNascimento" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:inputText id="dataNascimento" value="#{clienteMB.clienteSelecionado.dataNascimento}"  styleClass="form-control"> 
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:inputText>
+                        <b:datepicker id="cdate3" mode="toggle-icon"   firstDay="1" 
+                                      value="#{clienteMB.clienteSelecionado.dataNascimento}" required="true" />
                     </div>    
                 </div>
                 <div class="form-group">
@@ -139,7 +142,7 @@
                         <h:inputText value="#{clienteMB.clienteSelecionado.senha}" id="idSenha"  styleClass="form-control"/> 
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <h:outputLabel value="Admin" for="adm" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
@@ -155,14 +158,16 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <h:commandButton value="Cadastrar" class="btn btn-default" action="#{clienteMB.adicionarCliente()}" />
+                        <p:commandButton value="Cadastrar" class="btn btn-default" action="#{clienteMB.adicionarCliente()}" onclick="PF('dlg2').show();" delay="1500" />
                         <td></td>
-
-                        <h:button value="Voltar" outcome="/admin/index?faces-redirect=true" class="btn btn-default"/>
+                        <p:button value="Voltar" outcome="/admin/index?faces-redirect=true" class="btn btn-default"/>
                     </div>
                 </div>
+                <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+                    <h:outputText value="Nome: #{clienteMB.clienteSelecionado.nomeCliente}" />
+                </p:dialog>
             </h:form>
-        </div>
+        </div>        
     </h:body>
 </html>
 
