@@ -19,7 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Named
+@Named(value = "loginMB")
 @SessionScoped
 public class LoginMB implements Serializable{
 

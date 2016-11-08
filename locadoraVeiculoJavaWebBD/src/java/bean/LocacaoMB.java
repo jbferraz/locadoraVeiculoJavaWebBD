@@ -25,7 +25,9 @@ import model.session.ClienteFacade;
 @SessionScoped
 public class LocacaoMB implements Serializable{
     private Locacao locacaoSelecionado;
-    private LoginMB clienteSelecionado;
+    private Cliente clienteSelecionado;
+    @Inject
+    private LoginMB loginMB;
     private Veiculo veiculoSelecionado;
     @Inject
     private VeiculoFacade veiculoFacade;
@@ -70,24 +72,25 @@ public class LocacaoMB implements Serializable{
     }
 
     public String novoLocacao(){
-        locacaoSelecionado.setIdCliente(getClienteSelecionado().getClienteLogado());
-        locacaoSelecionado.setIdVeiculo(veiculoSelecionado);
-        locacaoSelecionado = new Locacao();
+        setLocacaoSelecionado(new Locacao());
         return ("/admin/formularioLocacaoCadastro?faces-redirect=true");
     }
     
     public String adicionarLocacao(){
-        locacaoFacade.create(locacaoSelecionado);
+        System.out.println("ID DO CLIENTE: "+this.getClienteSelecionado().getID());
+        getLocacaoSelecionado().setIdCliente(getClienteSelecionado());
+        getLocacaoSelecionado().setIdVeiculo(getVeiculoSelecionado());
+        locacaoFacade.create(getLocacaoSelecionado());
         return (this.novoLocacao());
     }
     
     public String editarLocacao(Locacao l){
-        locacaoSelecionado = l;
+        setLocacaoSelecionado(l);
         return ("/admin/formularioLocacaoEdicao?faces-redirect=true");
     }
     
     public String atualizarLocacao(){
-        locacaoFacade.edit(locacaoSelecionado);
+        locacaoFacade.edit(getLocacaoSelecionado());
         return ("/admin/listaLocacao?faces-redirect=true");
     }
     
@@ -103,17 +106,28 @@ public class LocacaoMB implements Serializable{
         return veiculoFacade.buscarPorPlaca(placa);
     }
 
+ 
+
     /**
-     * @return the clienteSelecionado
+     * @return the veiculoSelecionado
      */
-    public LoginMB getClienteSelecionado() {
-        return clienteSelecionado;
+    public Veiculo getVeiculoSelecionado() {
+        return veiculoSelecionado;
     }
 
     /**
-     * @param clienteSelecionado the clienteSelecionado to set
+     * @param veiculoSelecionado the veiculoSelecionado to set
      */
-    public void setClienteSelecionado(LoginMB clienteSelecionado) {
-        this.clienteSelecionado = clienteSelecionado;
+    public void setVeiculoSelecionado(Veiculo veiculoSelecionado) {
+        this.veiculoSelecionado = veiculoSelecionado;
+    }
+
+    /**
+     * @return the loginSelecionado
+     */
+    public Cliente getClienteSelecionado() {
+        System.out.println("Logado id> "+loginMB.getClienteLogado().getID());
+        clienteSelecionado= loginMB.getClienteLogado();
+            return clienteSelecionado;
     }
 }

@@ -46,14 +46,14 @@
                     </div>
                 </nav>
             </h:form>
-            <h:form prependId="false" class="form-horizontal">
-                <center>
-                    <h1>Cadastro Veículo</h1>
+             <h:form prependId="false" class="form-horizontal">
+               <center>
+                    <h1>Cadastro Locação</h1>
                 </center>
                 <div class="form-group">
-                    <h:outputLabel value="Cliente: " for="idCliente" styleClass="control-label" class="control-label col-sm-2"/>
+                    <h:outputLabel value="Cliente: " for="idcliente" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:outputText value="#{locacaoMB.clienteSelecionado.clienteLogado.nomeCliente}" id="idcliente"  styleClass="form-control"/> 
+                        <h:outputText value="#{locacaoMB.clienteSelecionado.nomeCliente}" id="idcliente"  styleClass="form-control"/> 
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,14 +83,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <p:commandButton value="Cadastrar" class="btn btn-default" action="#{locacaoMB.adicionarLocacao()}" onclick="PF('dlg2').show();" delay="1500" />
+                        <b:commandButton value="Cadastrar" class="btn btn-default" action="#{locacaoMB.adicionarLocacao()}"/>
                         <td></td>
                         <p:button value="Voltar" outcome="/admin/listaLocacao?faces-required=true" class="btn btn-default"/>
                     </div>
                 </div>
-                <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
-                    <h:outputText value="Veiculo: #{locacaoMB.locacaoSelecionado.idVeiculo.modelo}" />
-                </p:dialog>
             </h:form>
         </div>
     </h:body>
