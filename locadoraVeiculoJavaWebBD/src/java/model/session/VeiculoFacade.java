@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import model.Veiculo;
 
@@ -39,19 +40,8 @@ public class VeiculoFacade extends AbstractFacade<Veiculo> {
         return v;
     }
     
-    public List<Veiculo> listaVeicDisponivel(Boolean disp) {
-        String jpql = "select v from Veiculo v where v.disponivel=:disponivel";
-        TypedQuery<Veiculo> query = em.createQuery(jpql,Veiculo.class);
-        query.setParameter ("disponivel",disp);
-        Veiculo v = query.getSingleResult();
-        return (List<Veiculo>) v;
-    }
-    
-    public List<Veiculo> listaVeicDisponivelTeste() {
-        String jpql = "select v from Veiculo v where v.disponivel=:disponivel";
-        TypedQuery<Veiculo> query = em.createQuery(jpql,Veiculo.class);
-        query.setParameter ("disponivel",true);
-        Veiculo v = (Veiculo) query.getResultList();
-        return (List<Veiculo>) v;
+    public List<Veiculo> getListaVeicDisponivel() {
+        Query query=em.createQuery("select v from Veiculo v where v.disponivel=true");
+        return query.getResultList();
     }
 }

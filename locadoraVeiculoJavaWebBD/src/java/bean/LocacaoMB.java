@@ -25,7 +25,7 @@ import model.session.ClienteFacade;
 @SessionScoped
 public class LocacaoMB implements Serializable{
     private Locacao locacaoSelecionado;
-    private Cliente clienteSelecionado;
+    private LoginMB clienteSelecionado;
     private Veiculo veiculoSelecionado;
     @Inject
     private VeiculoFacade veiculoFacade;
@@ -61,20 +61,16 @@ public class LocacaoMB implements Serializable{
         return veiculoFacade.findAll();
     }
     
-    public List<Veiculo> getListaVeicDisponivel(){
-        return veiculoFacade.listaVeicDisponivelTeste();
-    }
-    
     public List<Cliente> getListaCliente(){
         return clienteFacade.findAll();
     }
     
-    public List<Veiculo> getListaVeicDisponivel(Boolean disp){
-        return veiculoFacade.listaVeicDisponivel(disp);
+    public List<Veiculo> getListaVeicDisponivel(){
+        return veiculoFacade.getListaVeicDisponivel();
     }
 
     public String novoLocacao(){
-        locacaoSelecionado.setIdCliente(clienteSelecionado);
+        locacaoSelecionado.setIdCliente(getClienteSelecionado().getClienteLogado());
         locacaoSelecionado.setIdVeiculo(veiculoSelecionado);
         locacaoSelecionado = new Locacao();
         return ("/admin/formularioLocacaoCadastro?faces-redirect=true");
@@ -105,5 +101,19 @@ public class LocacaoMB implements Serializable{
     
     public Veiculo buscarVeiculoPorPlaca(String placa) {
         return veiculoFacade.buscarPorPlaca(placa);
+    }
+
+    /**
+     * @return the clienteSelecionado
+     */
+    public LoginMB getClienteSelecionado() {
+        return clienteSelecionado;
+    }
+
+    /**
+     * @param clienteSelecionado the clienteSelecionado to set
+     */
+    public void setClienteSelecionado(LoginMB clienteSelecionado) {
+        this.clienteSelecionado = clienteSelecionado;
     }
 }

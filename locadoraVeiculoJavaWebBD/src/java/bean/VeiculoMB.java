@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -31,9 +32,10 @@ public class VeiculoMB implements Serializable{
     private MarcaFacade marcaFacade;
     @Inject
     private CategoriaVeiculoFacade catVeicFacade;
+    private List<Veiculo> listaVeicDisponivel;
 
     public VeiculoMB(){
-        veiculoSelecionado = new Veiculo();
+        veiculoSelecionado = new Veiculo();        
     }
     
     /**
@@ -62,6 +64,14 @@ public class VeiculoMB implements Serializable{
         return catVeicFacade.findAll();
     }
 
+    public List<Veiculo> getListaVeicDisponivel() {
+        return listaVeicDisponivel;
+    }
+
+    public void setListaVeicDisponivel(List<Veiculo> listaVeicDisponivel) {
+        this.listaVeicDisponivel = listaVeicDisponivel;
+    }
+    
     public String novoVeiculo(){
         veiculoSelecionado = new Veiculo();
         return ("/admin/formularioVeiculoCadastro?faces-redirect=true");
@@ -92,5 +102,10 @@ public class VeiculoMB implements Serializable{
     
     public CategoriaVeiculo buscarCatVeicPorDesc(String desc) {
         return catVeicFacade.buscarPorDescCatVeiculo(desc);
+    }
+    
+    public String listaVeicDisponiveis(){
+        listaVeicDisponivel = this.veiculoFacade.getListaVeicDisponivel();
+        return ("/admin/listaVeiculos?faces-redirect=true");
     }
 }

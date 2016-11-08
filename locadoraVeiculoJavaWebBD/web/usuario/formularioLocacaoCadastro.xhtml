@@ -3,19 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Cadastro</title>
+        <title>Editar Veículo</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
     <h:body>
         <div class="container-fluid">
-            <h:form  prependId="false" class="form-horizontal">
-               <nav class="navbar navbar-default">
+            <h:form prependId="false" class="form-horizontal">
+                <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,38 +28,14 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">        
-                                <li class="active"><h:commandLink value="Home" action="/admin/index"/>
+                                <li class="active"><h:commandLink value="Home" action="/usuario/index?faces-redirect=true"/>
                                 </li>                                
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
+                                        <li><h:commandLink value="Listar" action="/usuario/listaLocacao?faces-redirect=true"/></li>
+                                        <li><h:commandLink value="Reserva" action="/usuario/listaReservado"/></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -68,7 +45,7 @@
                         </div>
                     </div>
                 </nav>
-           </h:form>
+            </h:form>
             <h:form prependId="false" class="form-horizontal">
                 <center>
                     <h1>Cadastro Veículo</h1>
@@ -76,50 +53,33 @@
                 <div class="form-group">
                     <h:outputLabel value="Cliente: " for="idCliente" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:inputText value="#{clienteMB.clienteSelecionado.idcliente}" id="idcliente"  styleClass="form-control"/> 
+                        <h:outputText value="#{locacaoMB.clienteSelecionado.clienteLogado.nomeCliente}" id="idcliente"  styleClass="form-control"/> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Veiculo: " for="idVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
+                    <h:outputLabel value="Veiculo Disponível: " for="idVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
                         <h:selectOneMenu id="idVeiculo" value="#{locacaoMB.locacaoSelecionado.idVeiculo}" styleClass="form-control">
                             <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-                            <f:selectItems value="#{locacaoMB.listaVeiculo}"
+                            <f:selectItems value="#{locacaoMB.listaVeicDisponivel}"
                                            var="veiculo" itemValue="#{veiculo}"
-                                           itemLabel="#{veiculo.placa}"/>                    
+                                           itemLabel="#{veiculo.modelo}"/>                    
                         </h:selectOneMenu>
                     </div>
                 </div>
                 <div class="form-group">
                     <h:outputLabel value="Data Locação: " for="dataLocacao" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:inputText value="#{locacaoMB.locacaoSelecionado.dataLocacao}" id="dataLocacao"  styleClass="form-control"/> 
-                    </div>
+                        <b:datepicker id="dataLocacao" mode="toggle-icon"   firstDay="1" 
+                                      value="#{locacaoMB.locacaoSelecionado.dataLocacao}" required="true" />
+                    </div>    
                 </div>
                 <div class="form-group">
                     <h:outputLabel value="Data Retirada: " for="dataRetirada" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
-                        <h:inputText id="dataRetirada" value="#{locacaoMB.locacaoSelecionado.dataRetirada}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Km Retirada: " for="kmRetirada" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="kmRetirada" value="#{locacaoMB.locacaoSelecionado.kmRetirada}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Km Livre: " for="kmLivre" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="kmLivre" value="#{locacaoMB.locacaoSelecionado.kmLivre}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <h:outputLabel value="Status" for="status" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectBooleanCheckbox  value="#{locacaoMB.locacaoSelecionado.status}"  styleClass="checkbox"/>
-                    </div>
+                        <b:datepicker id="dataRetirada" mode="toggle-icon"   firstDay="1" 
+                                      value="#{locacaoMB.locacaoSelecionado.dataRetirada}" required="true" />
+                    </div>    
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
@@ -128,8 +88,8 @@
                         <p:button value="Voltar" outcome="/admin/listaLocacao?faces-required=true" class="btn btn-default"/>
                     </div>
                 </div>
-                <p:dialog header="Locação Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
-                    <h:outputText value="Tipo: #{locacaoMB.locacaoSelecionado.idVeiculo.placa}" />
+                <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+                    <h:outputText value="Veiculo: #{locacaoMB.locacaoSelecionado.idVeiculo.modelo}" />
                 </p:dialog>
             </h:form>
         </div>
