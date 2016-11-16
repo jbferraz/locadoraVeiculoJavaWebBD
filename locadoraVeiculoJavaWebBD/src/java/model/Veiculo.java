@@ -6,7 +6,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +17,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -87,13 +92,21 @@ public class Veiculo implements Serializable{
     @JoinColumn(name="IDMARCA_idMarca", referencedColumnName = "idMarca")
     @ManyToOne(optional = false)
     private Marca idMarca;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVeiculo")
+    private Collection<Locacao> veiculoCollection;
 
     public Veiculo() {
     }
-
-    public Veiculo(Integer idVeiculo) {
-        this.idVeiculo = idVeiculo;
+    
+    @XmlTransient
+    public Collection<Locacao> getVeiculoCollection() {
+        return veiculoCollection;
     }
+
+    public void setVeiculoCollection(Collection<Locacao> veiculoCollection) {
+        this.veiculoCollection = veiculoCollection;
+    }
+   
 
     /**
      * @return the idVeiculo
@@ -276,7 +289,27 @@ public class Veiculo implements Serializable{
     public void setIdMarca(Marca idMarca) {
         this.idMarca = idMarca;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Veiculo other = (Veiculo) obj;
+        return Objects.equals(this.idVeiculo, other.idVeiculo);
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.idVeiculo);
+        return hash;
+    }
     @Override
     public String toString() {
         return idVeiculo + modelo + ano + portas + placa;

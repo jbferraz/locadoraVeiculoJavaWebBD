@@ -5,9 +5,11 @@
  */
 package bean;
 
+import bean.util.beanUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.Veiculo;
@@ -23,24 +25,22 @@ import model.session.ClienteFacade;
  */
 @Named(value = "locacaoMB")
 @SessionScoped
-public class LocacaoMB implements Serializable{
+public class LocacaoMB implements Serializable {
+
     private Locacao locacaoSelecionado;
-    private Cliente clienteSelecionado;
-    @Inject
-    private LoginMB loginMB;
-    private Veiculo veiculoSelecionado;
     @Inject
     private VeiculoFacade veiculoFacade;
     @Inject
     private ClienteFacade clienteFacade;
     @Inject
     private LocacaoFacade locacaoFacade;
+   
 
-    public LocacaoMB(){
+    public LocacaoMB() {
         locacaoSelecionado = new Locacao();
-        
+
     }
-    
+
     /**
      * @return the locacaoSelecionado
      */
@@ -55,79 +55,56 @@ public class LocacaoMB implements Serializable{
         this.locacaoSelecionado = locacaoSelecionado;
     }
 
-    public List<Locacao> getListaLocacao(){
+    public List<Locacao> getListaLocacao() {
         return locacaoFacade.findAll();
     }
-    
-    public List<Veiculo> getListaVeiculo(){
+
+    public List<Veiculo> getListaVeiculo() {
         return veiculoFacade.findAll();
     }
-    
-    public List<Cliente> getListaCliente(){
+
+    public List<Cliente> getListaCliente() {
         return clienteFacade.findAll();
     }
-    
-    public List<Veiculo> getListaVeicDisponivel(){
+
+    public List<Veiculo> getListaVeicDisponivel() {
         return veiculoFacade.getListaVeicDisponivel();
     }
 
-    public String novoLocacao(){
-        setLocacaoSelecionado(new Locacao());
-        return ("/admin/formularioLocacaoCadastro?faces-redirect=true");
+    public String novoLocacao() {
+        locacaoSelecionado = new Locacao();
+        return ("formularioLocacao");
     }
-    
-    public String adicionarLocacao(){
-        System.out.println("ID DO CLIENTE: "+this.getClienteSelecionado().getID());
-        getLocacaoSelecionado().setIdCliente(getClienteSelecionado());
-        getLocacaoSelecionado().setIdVeiculo(getVeiculoSelecionado());
-        locacaoFacade.create(getLocacaoSelecionado());
+
+    public String adicionarLocacao() {
+        locacaoFacade.create(locacaoSelecionado);
         return (this.novoLocacao());
     }
-    
-    public String editarLocacao(Locacao l){
+
+    public String editarLocacao(Locacao l) {
         setLocacaoSelecionado(l);
         return ("/admin/formularioLocacaoEdicao?faces-redirect=true");
     }
-    
-    public String atualizarLocacao(){
-        locacaoFacade.edit(getLocacaoSelecionado());
+
+    public String atualizarLocacao() {
+        locacaoFacade.edit(locacaoSelecionado);
         return ("/admin/listaLocacao?faces-redirect=true");
     }
-    
-    public void removerLocacao(Locacao l){
+
+    public void removerLocacao(Locacao l) {
         locacaoFacade.remove(l);
     }
 
     public Cliente buscarClientePorNome(String nome) {
         return clienteFacade.buscarPorNomeCliente(nome);
     }
-    
+
     public Veiculo buscarVeiculoPorPlaca(String placa) {
         return veiculoFacade.buscarPorPlaca(placa);
     }
 
- 
-
-    /**
-     * @return the veiculoSelecionado
-     */
-    public Veiculo getVeiculoSelecionado() {
-        return veiculoSelecionado;
-    }
-
-    /**
-     * @param veiculoSelecionado the veiculoSelecionado to set
-     */
-    public void setVeiculoSelecionado(Veiculo veiculoSelecionado) {
-        this.veiculoSelecionado = veiculoSelecionado;
-    }
-
-    /**
-     * @return the loginSelecionado
-     */
-    public Cliente getClienteSelecionado() {
-        System.out.println("Logado id> "+loginMB.getClienteLogado().getID());
-        clienteSelecionado= loginMB.getClienteLogado();
-            return clienteSelecionado;
+    
+    public SelectItem[] getItemsAvailableSelectOne() {
+        return beanUtil.getSelectItems(locacaoFacade.findAll(), true);
     }
 }

@@ -115,10 +115,7 @@ public class CategoriaVeiculo implements Serializable{
             return false;
         }
         final CategoriaVeiculo other = (CategoriaVeiculo) obj;
-        if (!Objects.equals(this.idCatVeiculo, other.idCatVeiculo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.idCatVeiculo, other.idCatVeiculo);
     }
     
     @Override

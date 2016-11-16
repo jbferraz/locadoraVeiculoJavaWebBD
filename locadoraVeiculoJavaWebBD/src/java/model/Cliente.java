@@ -6,8 +6,11 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,12 +18,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,18 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "cliente")
 @XmlRootElement
-//@NamedQueries({
-//    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM cliente c"),
-//    @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM cliente c WHERE c.idcliente = :idcliente"),
-//    @NamedQuery(name = "Cliente.findByNomeCliente", query = "SELECT c FROM cliente c WHERE c.nomeCliente = :nomeCliente"),
-//    @NamedQuery(name = "Cliente.findByLogin", query = "SELECT c FROM cliente c WHERE c.login = :login")})
 public class Cliente implements Serializable {
 
     private static long serialVersionUID = 1L;
-
-    /**
-     * @return the serialVersionUID
-     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -54,8 +50,8 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idcliente")
-    private Integer idcliente;
+    @Column(name = "idCliente")
+    private Integer idCliente;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -92,21 +88,45 @@ public class Cliente implements Serializable {
     private Boolean cliAtivo;
     @Column(name = "adm")
     private Boolean adm;
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCliente")
+    private Collection<Locacao> clienteCollection;
 
-    public Integer getID() {
-        return getIdcliente();
+    @XmlTransient
+    public Collection<Locacao> getClienteCollection() {
+        return clienteCollection;
     }
 
-    public void setIdcliente(Integer idcliente) {
-        this.idcliente = idcliente;
+    public void setClienteCollection(Collection<Locacao> clienteCollection) {
+        this.clienteCollection = clienteCollection;
+    }
+   
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (!Objects.equals(this.idCliente, other.idCliente)) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
     /**
      * @return the idcliente
      */
-    public Integer getIdcliente() {
-        return idcliente;
+    public Integer getIdCliente() {
+        return idCliente;
     }
 
     /**
@@ -279,7 +299,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return idcliente + nomeCliente + CPF;
+        return idCliente + nomeCliente + CPF;
     }
     
      public boolean isAdmin() {

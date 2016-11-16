@@ -61,7 +61,7 @@ public class Marca implements Serializable{
     /**
      * @param idMarca the idMarca to set
      */
-    public void setidMarca(Integer idMarca) {
+    public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
 

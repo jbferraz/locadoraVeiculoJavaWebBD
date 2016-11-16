@@ -5,9 +5,11 @@
  */
 package bean;
 
+import bean.util.beanUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.Cliente;
@@ -64,5 +66,7 @@ public class ClienteMB implements Serializable{
     public void removerCliente(Cliente cliente){
         clienteFacade.remove(cliente);
     }
-    
+    public SelectItem[] getItemsAvailableSelectOne() {
+        return beanUtil.getSelectItems(clienteFacade.findAll(), true);
+    }
 }

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -54,32 +54,20 @@ public class Locacao implements Serializable{
     @Column(name = "dataRetirada")
     @Temporal(TemporalType.DATE)
     private Date dataRetirada;
-    @Column(name = "dataDevolucao")
-    @Temporal(TemporalType.DATE)
-    private Date dataDevolucao;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "kmRetirada")
-    private Integer kmRetirada;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "kmDevolucao")
-    private Integer kmDevolucao;
-    @Column(name = "kmLivre")
-    private Boolean kmLivre;
-    @Column(name = "status")
-    private Boolean status;
     
-    @JoinColumn(name="IDCLIENTE_idCliente", referencedColumnName = "idCliente")
-    @ManyToOne(optional = false)
+    @NotNull  
+    @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
+    @ManyToOne
     private Cliente idCliente;
-    @JoinColumn(name="IDVEICULO_idVeiculo", referencedColumnName = "idVeiculo")
-    @ManyToOne(optional = false)
+    @NotNull
+    @JoinColumn(name="idVeiculo", referencedColumnName = "idVeiculo")
+    @ManyToOne
     private Veiculo idVeiculo;
 
     public Locacao() {
     }
-
+    
+    
     /**
      * @return the idLocacao
      */
@@ -122,79 +110,7 @@ public class Locacao implements Serializable{
         this.dataRetirada = dataRetirada;
     }
 
-    /**
-     * @return the dataDevolucao
-     */
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    /**
-     * @param dataDevolucao the dataDevolucao to set
-     */
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
-
-    /**
-     * @return the kmRetirada
-     */
-    public Integer getKmRetirada() {
-        return kmRetirada;
-    }
-
-    /**
-     * @param kmRetirada the kmRetirada to set
-     */
-    public void setKmRetirada(Integer kmRetirada) {
-        this.kmRetirada = kmRetirada;
-    }
-
-    /**
-     * @return the kmDevolucao
-     */
-    public Integer getKmDevolucao() {
-        return kmDevolucao;
-    }
-
-    /**
-     * @param kmDevolucao the kmDevolucao to set
-     */
-    public void setKmDevolucao(Integer kmDevolucao) {
-        this.kmDevolucao = kmDevolucao;
-    }
-
-    /**
-     * @return the kmLivre
-     */
-    public Boolean getKmLivre() {
-        return kmLivre;
-    }
-
-    /**
-     * @param kmLivre the kmLivre to set
-     */
-    public void setKmLivre(Boolean kmLivre) {
-        this.kmLivre = kmLivre;
-    }
-
-    /**
-     * @return the status
-     */
-    public Boolean getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    /**
-     * @return the idCliente
-     */
+    
     public Cliente getIdCliente() {
         return idCliente;
     }
@@ -219,5 +135,5 @@ public class Locacao implements Serializable{
     public void setIdVeiculo(Veiculo idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
-    
+   
 }

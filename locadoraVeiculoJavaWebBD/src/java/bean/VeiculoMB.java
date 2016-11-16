@@ -5,10 +5,11 @@
  */
 package bean;
 
+import bean.util.beanUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.CategoriaVeiculo;
@@ -107,5 +108,8 @@ public class VeiculoMB implements Serializable{
     public String listaVeicDisponiveis(){
         listaVeicDisponivel = this.veiculoFacade.getListaVeicDisponivel();
         return ("/admin/listaVeiculos?faces-redirect=true");
+    }
+    public SelectItem[] getItemsAvailableSelectOne() {
+        return beanUtil.getSelectItems(veiculoFacade.findAll(), true);
     }
 }

@@ -2,161 +2,105 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Projeto CRUD</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </h:head>
-    <h:body>
-        <div class="container-fluid">
-            <h:form>
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">LocaCar</a>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+     <h:body>
+        <ui:composition template="./newTemplate.xhtml">
+            <ui:define name="top">
+            </ui:define>
+            <ui:define name="content">
+                <div class="container-fluid">
+                    <h:form>
+                        <div class="table-responsive">
+                            <h:dataTable var="locacao" value="#{locacaoMB.listaLocacao}" styleClass="table">
+                                <f:facet name="header">
+                                    <h:outputText value="Tabela de Locações" />
+                                </f:facet>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Locação" />
+                                    </f:facet>
+                                    <h:outputText id="idLocacao" value="#{locacao.idLocacao}"  />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cliente" />
+                                    </f:facet>
+                                    <h:outputText id="idCliente" value="#{locacao.idCliente.nomeCliente}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Placa Veiculo" />
+                                    </f:facet>
+                                    <h:outputText id="idVeiculo" value="#{locacao.idVeiculo.placa}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Locação" />
+                                    </f:facet>
+                                    <h:outputText  id="endereco" value="#{locacao.dataLocacao}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Retirada" />
+                                    </f:facet>
+                                    <h:outputText id="dataRetirada" value="#{locacao.dataRetirada}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Devolução" />
+                                    </f:facet>
+                                    <h:outputText  id="dataDevolucao" value="#{locacao.dataDevolucao}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Km Retirada" />
+                                    </f:facet>
+                                    <h:outputText  id="kmRetirada" value="#{locacao.kmRetirada}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Km Devolução" />
+                                    </f:facet>
+                                    <h:outputText  id="kmDevolucao" value="#{locacao.kmDevolucao}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Km Livre" />
+                                    </f:facet>
+                                    <h:outputText  id="kmLivre" value="#{locacao.kmLivre}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Status" />
+                                    </f:facet>
+                                    <h:outputText  id="status" value="#{locacao.status}" />
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">
+                                        <span>
+                                            <h:outputText value="Operação" />
+                                        </span>
+                                    </f:facet>
+                                    <div class="btn-group">
+                                        <h:commandButton value="Editar "  class="btn btn-default" action="#{locacaoMB.editarLocacao(locacao)}" />
+                                        <h:commandButton value="Remover" class="btn btn-default" action="#{locacaoMB.removerLocacao(locacao)}"/>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
                         </div>
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">        
-                                <li class="active"><h:commandLink value="Home" action="/admin/index"/>
-                                </li>                                
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><h:commandLink class="glyphicon glyphicon-log-in" value=" Logout" action="#{loginMB.realizaLogout()}"/></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </h:form>
-            <h:form>
-                <div class="table-responsive">
-                    <h:dataTable var="locacao" value="#{locacaoMB.listaLocacao}" styleClass="table">
-                        <f:facet name="header">
-                            <h:outputText value="Tabela de Locações" />
-                        </f:facet>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Id Locação" />
-                            </f:facet>
-                            <h:outputText id="idLocacao" value="#{locacao.idLocacao}"  />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Cliente" />
-                            </f:facet>
-                            <h:outputText id="idCliente" value="#{locacao.idCliente.nomeCliente}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Placa Veiculo" />
-                            </f:facet>
-                            <h:outputText id="idVeiculo" value="#{locacao.idVeiculo.placa}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Data Locação" />
-                            </f:facet>
-                            <h:outputText  id="endereco" value="#{locacao.dataLocacao}">
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Data Retirada" />
-                            </f:facet>
-                            <h:outputText id="dataRetirada" value="#{locacao.dataRetirada}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Data Devolução" />
-                            </f:facet>
-                            <h:outputText  id="dataDevolucao" value="#{locacao.dataDevolucao}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Km Retirada" />
-                            </f:facet>
-                            <h:outputText  id="kmRetirada" value="#{locacao.kmRetirada}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Km Devolução" />
-                            </f:facet>
-                            <h:outputText  id="kmDevolucao" value="#{locacao.kmDevolucao}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Km Livre" />
-                            </f:facet>
-                            <h:outputText  id="kmLivre" value="#{locacao.kmLivre}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Status" />
-                            </f:facet>
-                            <h:outputText  id="status" value="#{locacao.status}" />
-                        </h:column>
-                        <h:column >
-                            <f:facet name="header">
-                                <span>
-                                    <h:outputText value="Operação" />
-                                </span>
-                            </f:facet>
-                            <div class="btn-group">
-                                <h:commandButton value="Editar "  class="btn btn-default" action="#{locacaoMB.editarLocacao(locacao)}" />
-                                <h:commandButton value="Remover" class="btn btn-default" action="#{locacaoMB.removerLocacao(locacao)}"/>
-                            </div>
-                        </h:column>
-                    </h:dataTable>
+                        <br/><br/>
+                        <h:commandButton value="Novo Locação" class="btn btn-default" action="#{locacaoMB.novoLocacao()}"/>
+                    </h:form>
                 </div>
-                <br/><br/>
-                <h:commandButton value="Novo Locação" class="btn btn-default" action="#{locacaoMB.novoLocacao()}"/>
-            </h:form>
-        </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

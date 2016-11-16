@@ -4,169 +4,112 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:p="http://primefaces.org/ui">
-
-    <h:head>
-        <title>Cadastro</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </h:head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:body>
-        <div >
-            <h:form prependId="false" class="form-horizontal">
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">LocaCar</a>
+        <ui:composition template="./newTemplate.xhtml">
+            <ui:define name="top">
+            </ui:define>
+            <ui:define name="content">
+           
+                    <h:form prependId="false" class="form-horizontal">
+                        <center>
+                            <h1>Cadastro Cliente</h1>
+                        </center>
+                        <div class="form-group">
+                            <h:outputLabel value="Nome " for="idNome" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText value="#{clienteMB.clienteSelecionado.nomeCliente}" id="idNome"  styleClass="form-control"/> 
+                            </div>
                         </div>
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">        
-                                <li class="active"><h:commandLink value="Home" action="/admin/index"/>
-                                </li>                                
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><h:commandLink class="glyphicon glyphicon-log-in" value=" Logout" action="#{loginMB.realizaLogout()}"/></li>
-                            </ul>
+                        <div class="form-group">
+                            <h:outputLabel value="CPF: " for="idCpf" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText value="#{clienteMB.clienteSelecionado.CPF}" id="idCpf"  styleClass="form-control"/> 
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </h:form>
-            <h:form prependId="false" class="form-horizontal">
-                <center>
-                    <h1>Cadastro Cliente</h1>
-                </center>
-                <div class="form-group">
-                    <h:outputLabel value="Nome " for="idNome" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText value="#{clienteMB.clienteSelecionado.nomeCliente}" id="idNome"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="CPF: " for="idCpf" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText value="#{clienteMB.clienteSelecionado.CPF}" id="idCpf"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Endereço " for="idEndereco" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idEndereco" value="#{clienteMB.clienteSelecionado.endereco}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Celular " for="idCelular" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idCelular" value="#{clienteMB.clienteSelecionado.celular}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Telefone " for="idTelefone" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idTelefone" value="#{clienteMB.clienteSelecionado.telefone}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Email: " for="idEmail" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idEmail" value="#{clienteMB.clienteSelecionado.email}"  styleClass="form-control"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Data Nascimento:" for="dataNascimento" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <b:datepicker id="cdate3" mode="toggle-icon"   firstDay="1" 
-                                      value="#{clienteMB.clienteSelecionado.dataNascimento}" required="true" />
-                    </div>    
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Sexo: " for="idSexo" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectOneMenu id="idSexo" value="#{clienteMB.clienteSelecionado.sexo}" styleClass="form-control">
-                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-                            <f:selectItem itemLabel="Masculino" itemValue="M" />
-                            <f:selectItem itemLabel="Feminino" itemValue="F" />
-                        </h:selectOneMenu>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Login: " for="idLogin" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText value="#{clienteMB.clienteSelecionado.login}" id="idLogin"  styleClass="form-control"/> 
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Endereço " for="idEndereco" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText id="idEndereco" value="#{clienteMB.clienteSelecionado.endereco}"  styleClass="form-control"/> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Celular " for="idCelular" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText id="idCelular" value="#{clienteMB.clienteSelecionado.celular}"  styleClass="form-control"/> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Telefone " for="idTelefone" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText id="idTelefone" value="#{clienteMB.clienteSelecionado.telefone}"  styleClass="form-control"/> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Email: " for="idEmail" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText id="idEmail" value="#{clienteMB.clienteSelecionado.email}"  styleClass="form-control"/> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Data Nascimento:" for="dataNascimento" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <b:datepicker id="cdate3" mode="toggle-icon"   firstDay="1" 
+                                              value="#{clienteMB.clienteSelecionado.dataNascimento}" required="true" />
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Sexo: " for="idSexo" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:selectOneMenu id="idSexo" value="#{clienteMB.clienteSelecionado.sexo}" styleClass="form-control">
+                                    <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                    <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Login: " for="idLogin" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText value="#{clienteMB.clienteSelecionado.login}" id="idLogin"  styleClass="form-control"/> 
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <h:outputLabel value="Senha " for="idSenha" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText value="#{clienteMB.clienteSelecionado.senha}" id="idSenha"  styleClass="form-control"/> 
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Senha " for="idSenha" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:inputText value="#{clienteMB.clienteSelecionado.senha}" id="idSenha"  styleClass="form-control"/> 
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <h:outputLabel value="Admin" for="adm" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectBooleanCheckbox  value="#{clienteMB.clienteSelecionado.adm}" styleClass="checkbox"/> 
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Admin" for="adm" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:selectBooleanCheckbox  value="#{clienteMB.clienteSelecionado.adm}" styleClass="checkbox"/> 
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <h:outputLabel value="Cliente Ativo " for="idCliAtivo" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectBooleanCheckbox  value="#{clienteMB.clienteSelecionado.cliAtivo}" styleClass="checkbox"/> 
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <p:commandButton value="Cadastrar" class="btn btn-default" action="#{clienteMB.adicionarCliente()}" onclick="PF('dlg2').show();" delay="1500" />
-                        <td></td>
-                        <p:button value="Voltar" outcome="/admin/index?faces-redirect=true" class="btn btn-default"/>
-                    </div>
-                </div>
-                <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
-                    <h:outputText value="Nome: #{clienteMB.clienteSelecionado.nomeCliente}" />
-                </p:dialog>
-            </h:form>
-        </div>        
+                        <div class="form-group">
+                            <h:outputLabel value="Cliente Ativo " for="idCliAtivo" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <h:selectBooleanCheckbox  value="#{clienteMB.clienteSelecionado.cliAtivo}" styleClass="checkbox"/> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <p:commandButton value="Cadastrar" class="btn btn-default" action="#{clienteMB.adicionarCliente()}" onclick="PF('dlg2').show();" delay="1500" />
+                                <td></td>
+                                <p:button value="Voltar" outcome="/admin/index?faces-redirect=true" class="btn btn-default"/>
+                            </div>
+                        </div>
+                        <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+                            <h:outputText value="Nome: #{clienteMB.clienteSelecionado.nomeCliente}" />
+                        </p:dialog>
+                    </h:form>
+             
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

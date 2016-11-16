@@ -3,170 +3,113 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Cadastro</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </h:head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <h:body>
-        <div class="container-fluid">
-            <h:form  prependId="false" class="form-horizontal">
-               <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">LocaCar</a>
-                        </div>
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">        
-                                <li class="active"><h:commandLink value="Home" action="/admin/index"/>
-                                </li>                                
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><h:commandLink class="glyphicon glyphicon-log-in" value=" Logout" action="#{loginMB.realizaLogout()}"/></li>
-                            </ul>
+        <ui:composition template="./newTemplate.xhtml">
+            <ui:define name="top">
+            </ui:define>
+            <ui:define name="content">
+                <h:form prependId="false" class="form-horizontal">
+                    <center>
+                        <h1>Cadastro Veículo</h1>
+                    </center>
+                    <div class="form-group">
+                        <h:outputLabel value="Marca: " for="idMarca" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:selectOneMenu id="idMarca" value="#{veiculoMB.veiculoSelecionado.idMarca}" styleClass="form-control">
+                                <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                                <f:selectItems value="#{veiculoMB.listaMarca}"
+                                               var="marca" itemValue="#{marca}"
+                                               itemLabel="#{marca.nomeMarca}"/>                    
+                            </h:selectOneMenu>
                         </div>
                     </div>
-                </nav>
-           </h:form>
-            <h:form prependId="false" class="form-horizontal">
-                <center>
-                    <h1>Cadastro Veículo</h1>
-                </center>
-                <div class="form-group">
-                    <h:outputLabel value="Marca: " for="idMarca" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectOneMenu id="idMarca" value="#{veiculoMB.veiculoSelecionado.idMarca}" styleClass="form-control">
-                            <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
-                            <f:selectItems value="#{veiculoMB.listaMarca}"
-                                           var="marca" itemValue="#{marca}"
-                                           itemLabel="#{marca.nomeMarca}"/>                    
-                        </h:selectOneMenu>
+                    <div class="form-group">
+                        <h:outputLabel value="Categoria: " for="idCatVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:selectOneMenu id="idCatVeiculo" value="#{veiculoMB.veiculoSelecionado.idCatVeiculo}" styleClass="form-control">
+                                <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                                <f:selectItems value="#{veiculoMB.listaCatVeiculo}"
+                                               var="categoria" itemValue="#{categoria}"
+                                               itemLabel="#{categoria.descCatVeiculo}"/>                    
+                            </h:selectOneMenu>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Categoria: " for="idCatVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectOneMenu id="idCatVeiculo" value="#{veiculoMB.veiculoSelecionado.idCatVeiculo}" styleClass="form-control">
-                            <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-                            <f:selectItems value="#{veiculoMB.listaCatVeiculo}"
-                                           var="categoria" itemValue="#{categoria}"
-                                           itemLabel="#{categoria.descCatVeiculo}"/>                    
-                        </h:selectOneMenu>
+                    <div class="form-group">
+                        <h:outputLabel value="Modelo: " for="idModelo" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText value="#{veiculoMB.veiculoSelecionado.modelo}" id="idModelo"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Modelo: " for="idModelo" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText value="#{veiculoMB.veiculoSelecionado.modelo}" id="idModelo"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Placa: " for="idPlaca" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idPlaca" value="#{veiculoMB.veiculoSelecionado.placa}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Placa: " for="idPlaca" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idPlaca" value="#{veiculoMB.veiculoSelecionado.placa}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Cor: " for="idCor" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idCor" value="#{veiculoMB.veiculoSelecionado.cor}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Cor: " for="idCor" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idCor" value="#{veiculoMB.veiculoSelecionado.cor}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Ano " for="idAno" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idAno" value="#{veiculoMB.veiculoSelecionado.ano}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Ano " for="idAno" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idAno" value="#{veiculoMB.veiculoSelecionado.ano}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Opcionais " for="idOpcionais" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idOpcionais" value="#{veiculoMB.veiculoSelecionado.opcionais}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Opcionais " for="idOpcionais" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idOpcionais" value="#{veiculoMB.veiculoSelecionado.opcionais}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Portas " for="idPortas" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idPortas" value="#{veiculoMB.veiculoSelecionado.portas}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Portas " for="idPortas" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idPortas" value="#{veiculoMB.veiculoSelecionado.portas}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Valor KM: " for="idValorKm" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idValorKm" value="#{veiculoMB.veiculoSelecionado.valorKm}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Valor KM: " for="idValorKm" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idValorKm" value="#{veiculoMB.veiculoSelecionado.valorKm}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Valor Livre: " for="idValorLivre" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="idValorDia" value="#{veiculoMB.veiculoSelecionado.valorLivre}"  styleClass="form-control"/> 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Valor Livre: " for="idValorLivre" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:inputText id="idValorDia" value="#{veiculoMB.veiculoSelecionado.valorLivre}"  styleClass="form-control"/> 
+                    <div class="form-group">
+                        <h:outputLabel value="Disponivel " for="idDisponivel" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:selectBooleanCheckbox required="true" value="#{veiculoMB.veiculoSelecionado.disponivel}"  styleClass="checkbox"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Disponivel " for="idDisponivel" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectBooleanCheckbox required="true" value="#{veiculoMB.veiculoSelecionado.disponivel}"  styleClass="checkbox"/>
+                    <div class="form-group">
+                        <h:outputLabel value="Veículo Ativo" for="idVeicAtivo" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:selectBooleanCheckbox  value="#{veiculoMB.veiculoSelecionado.veicAtivo}"  styleClass="checkbox"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Veículo Ativo" for="idVeicAtivo" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectBooleanCheckbox  value="#{veiculoMB.veiculoSelecionado.veicAtivo}"  styleClass="checkbox"/>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <p:commandButton value="Cadastrar" class="btn btn-default" action="#{veiculoMB.adicionarVeiculo()}" onclick="PF('dlg2').show();" delay="1500" />
+                            <td></td>
+                            <p:button value="Voltar" outcome="/admin/listaVeiculos?faces-required=true" class="btn btn-default"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <p:commandButton value="Cadastrar" class="btn btn-default" action="#{veiculoMB.adicionarVeiculo()}" onclick="PF('dlg2').show();" delay="1500" />
-                        <td></td>
-                        <p:button value="Voltar" outcome="/admin/listaVeiculos?faces-required=true" class="btn btn-default"/>
-                    </div>
-                </div>
-                <p:dialog header="Veículo Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
-                    <h:outputText value="Tipo: #{veiculoMB.veiculoSelecionado.modelo}" />
-                </p:dialog>
-            </h:form>
-        </div>
+                    <p:dialog header="Veículo Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+                        <h:outputText value="Tipo: #{veiculoMB.veiculoSelecionado.modelo}" />
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 
