@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="./newTemplate.xhtml">
             <ui:define name="top">
@@ -106,6 +107,9 @@
                         </div>
                         <br/><br/>
                         <h:commandButton value="Novo Usuário" class="btn btn-default" action="#{clienteMB.novoCliente()}"/>
+                        <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+                        
+                        </p:dialog>
                     </h:form>
                 </div>
             </ui:define>

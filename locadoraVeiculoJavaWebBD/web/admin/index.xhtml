@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
+
     <h:body>
         <ui:composition template="./newTemplate.xhtml">
             <ui:define name="top">
@@ -14,51 +14,84 @@
                 <div class="container-fluid">
                     <h:form>
                         <div class="table-responsive">
-                            <h:dataTable var="usuario" value="#{usuarioMB.listaUsuarios}" styleClass="table">
+                            <h:dataTable var="cliente" value="#{clienteMB.listaCliente}" styleClass="table">
                                 <f:facet name="header">
-                                    <h:outputText value="Tabela de Usuários" />
+                                    <h:outputText value="Tabela de Clientes" />
                                 </f:facet>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Cliente" />
+                                    </f:facet>
+                                    <h:outputText id="idCliente" value="#{cliente.idCliente}"  />
+                                </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Nome" />
                                     </f:facet>
-                                    <h:outputText id="idNome" value="#{usuario.nome}"  />
+                                    <h:outputText id="nome" value="#{cliente.nomeCliente}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CPF" />
+                                    </f:facet>
+                                    <h:outputText id="CPF" value="#{cliente.CPF}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Endereço" />
+                                    </f:facet>
+                                    <h:outputText  id="endereco" value="#{cliente.endereco}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Celular" />
+                                    </f:facet>
+                                    <h:outputText id="celular" value="#{cliente.celular}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Telefone" />
                                     </f:facet>
-                                    <h:outputText id="idTelefone" value="#{usuario.telefone}" />
+                                    <h:outputText  id="telefone" value="#{cliente.telefone}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Email" />
+                                        <h:outputText value="e-mail" />
                                     </f:facet>
-                                    <h:outputText id="idEmail" value="#{usuario.email}" />
+                                    <h:outputText  id="email" value="#{cliente.email}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Dt Nasc." />
+                                    </f:facet>
+                                    <h:outputText  id="dtNasc" value="#{cliente.dataNascimento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Sexo" />
                                     </f:facet>
-                                    <h:outputText  id="idSexo" value="#{usuario.sexoString}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Estado" />
-                                    </f:facet>
-                                    <h:outputText id="idEstado" value="#{usuario.estado}" />
+                                    <h:outputText  id="sexo" value="#{cliente.sexo}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Login" />
                                     </f:facet>
-                                    <h:outputText  id="idLogin" value="#{usuario.login}" />
+                                    <h:outputText  id="login" value="#{cliente.login}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ativo" />
+                                    </f:facet>
+                                    <h:outputText  id="ativo" value="#{cliente.cliAtivoString}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Admin" />
                                     </f:facet>
-                                    <h:outputText  value="#{usuario.adminString}" />
+                                    <h:outputText  id="admin" value="#{cliente.adminString}" />
+                                    <!--REVISAR-->
                                 </h:column>
                                 <h:column >
                                     <f:facet name="header">
@@ -67,19 +100,18 @@
                                         </span>
                                     </f:facet>
                                     <div class="btn-group">
-                                        <h:commandButton value="Editar "  class="btn btn-default" action="#{usuarioMB.editarUsuario(usuario)}" />
-                                        <h:commandButton value="Remover" class="btn btn-default" action="#{usuarioMB.removerUsuario(usuario)}"/>
+                                        <h:commandButton value="Editar "  class="btn btn-default" action="#{clienteMB.editarCliente(cliente)}" />
+                                        <h:commandButton value="Remover" class="btn btn-default" action="#{clienteMB.removerCliente(cliente)}"/>
                                     </div>
                                 </h:column>
                             </h:dataTable>
                         </div>
                         <br/><br/>
-                        <h:commandButton value="Novo Usuário" class="btn btn-default" action="#{usuarioMB.novoUsuario()}"/>
-                   <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
-                        
-                    </p:dialog>
+                        <h:commandButton value="Novo Usuário" class="btn btn-default" action="#{clienteMB.novoCliente()}"/>
+                        <p:dialog header="Cliente Cadastrado!" widgetVar="dlg2" modal="true" height="50" >
+
+                        </p:dialog>
                     </h:form>
-                   
                 </div>
             </ui:define>
         </ui:composition>
