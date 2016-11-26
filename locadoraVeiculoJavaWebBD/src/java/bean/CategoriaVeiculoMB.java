@@ -54,6 +54,7 @@ public class CategoriaVeiculoMB implements Serializable{
     }
     
     public String adicionarCatVeiculo(){
+        catVeicSelecionado.setCatAtivo(Boolean.TRUE);
         categoriaVeiculoFacade.create(catVeicSelecionado);
         return (this.novoCatVeiculo());
     }

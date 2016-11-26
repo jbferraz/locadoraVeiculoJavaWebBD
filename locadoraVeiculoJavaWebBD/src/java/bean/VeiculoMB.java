@@ -79,6 +79,8 @@ public class VeiculoMB implements Serializable{
     }
     
     public String adicionarVeiculo(){
+        veiculoSelecionado.setDisponivel(Boolean.TRUE);
+        veiculoSelecionado.setVeicAtivo(Boolean.TRUE);
         veiculoFacade.create(veiculoSelecionado);
         return (this.novoVeiculo());
     }

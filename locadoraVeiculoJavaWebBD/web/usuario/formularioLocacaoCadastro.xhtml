@@ -17,17 +17,6 @@
                     <h1>Cadastro Locação</h1>
                 </center>
                 <div class="form-group">
-                    <h:outputLabel value=" Cliente: " for="idCliente" styleClass="control-label" class="control-label col-sm-2"/>
-                    <div class="col-sm-3">
-                        <h:selectOneMenu id="idCliente" value="#{locacaoMB.locacaoSelecionado.idCliente}" styleClass="form-control">
-                            <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-                            <f:selectItems value="#{locacaoMB.listaCliente}"
-                                           var="cliente" itemValue="#{cliente}"
-                                           itemLabel="#{cliente.nomeCliente}"/>                    
-                        </h:selectOneMenu>
-                </div>
-                </div>
-                <div class="form-group">
                     <h:outputLabel value="Veiculo Disponível: " for="idVeiculo" styleClass="control-label" class="control-label col-sm-2"/>
                     <div class="col-sm-3">
                         <h:selectOneMenu id="idVeiculo" value="#{locacaoMB.locacaoSelecionado.idVeiculo}" styleClass="form-control">
@@ -53,10 +42,16 @@
                     </div>    
                 </div>
                 <div class="form-group">
+                            <h:outputLabel value="km Livre: " for="kmLivre" styleClass="control-label" class="control-label col-sm-2"/>
+                            <div class="col-sm-3">
+                                <b:selectBooleanCheckbox id="kmLivre" value="#{locacaoMB.locacaoSelecionado.kmLivre}" styleClass="checkbox"/> 
+                            </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <h:commandButton value="Cadastrar" class="btn btn-default" action="#{locacaoMB.adicionarLocacao()}"/>
                         <td></td>
-                        <h:button value="Voltar" outcome="/admin/listaLocacao?faces-required=true" class="btn btn-default"/>
+                        <h:button value="Voltar" outcome="index?faces-required=true" class="btn btn-default"/>
                     </div>
                 </div>
             </h:form>

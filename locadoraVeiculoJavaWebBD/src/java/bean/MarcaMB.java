@@ -54,6 +54,7 @@ public class MarcaMB implements Serializable{
     }
     
     public String adicionarMarca(){
+        marcaSelecionado.setmarcaAtiva(Boolean.TRUE);
         marcaFacade.create(marcaSelecionado);
         return (this.novoMarca());
     }

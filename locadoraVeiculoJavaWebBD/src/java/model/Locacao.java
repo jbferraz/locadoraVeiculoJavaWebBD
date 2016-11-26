@@ -54,6 +54,17 @@ public class Locacao implements Serializable{
     @Column(name = "dataRetirada")
     @Temporal(TemporalType.DATE)
     private Date dataRetirada;
+    @Column(name = "dataDevolucao")
+    @Temporal(TemporalType.DATE)
+    private Date dataDevolucao;
+    @Column(name = "kmRetirada")
+    private Integer kmRetirada;
+    @Column(name = "kmDevolucao")
+    private Integer kmDevolucao;
+    @Column(name = "kmLivre")
+    private Boolean kmLivre;
+    @Column(name = "status")
+    private Boolean status;
     
     @NotNull  
     @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
@@ -135,5 +146,76 @@ public class Locacao implements Serializable{
     public void setIdVeiculo(Veiculo idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
+
+    /**
+     * @return the dataDevolucao
+     */
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    /**
+     * @param dataDevolucao the dataDevolucao to set
+     */
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    /**
+     * @return the kmRetirada
+     */
+    public Integer getKmRetirada() {
+        return kmRetirada;
+    }
+
+    /**
+     * @param kmRetirada the kmRetirada to set
+     */
+    public void setKmRetirada(Integer kmRetirada) {
+        this.kmRetirada = kmRetirada;
+    }
+
+    /**
+     * @return the kmDevolucao
+     */
+    public Integer getKmDevolucao() {
+        return kmDevolucao;
+    }
+
+    /**
+     * @param kmDevolucao the kmDevolucao to set
+     */
+    public void setKmDevolucao(Integer kmDevolucao) {
+        this.kmDevolucao = kmDevolucao;
+    }
+
+    /**
+     * @return the kmLivre
+     */
+    public Boolean getKmLivre() {
+        return kmLivre;
+    }
+
+    /**
+     * @param kmLivre the kmLivre to set
+     */
+    public void setKmLivre(Boolean kmLivre) {
+        this.kmLivre = kmLivre;
+    }
+
+    /**
+     * @return the status
+     */
+    public Boolean getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
    
+    
 }

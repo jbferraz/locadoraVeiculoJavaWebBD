@@ -49,6 +49,7 @@ public class ClienteMB implements Serializable{
     }
     
     public String adicionarCliente(){
+        clienteSelecionado.setCliAtivo(Boolean.TRUE);
         clienteFacade.create(clienteSelecionado);
         return(this.novoCliente());
     }

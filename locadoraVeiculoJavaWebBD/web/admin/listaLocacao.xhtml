@@ -9,10 +9,10 @@
             <ui:define name="top">
             </ui:define>
             <ui:define name="content">
+                <h:form prependId="false" class="form-horizontal">
                 <div class="container-fluid">
-                    <h:form>
                         <div class="table-responsive">
-                            <h:dataTable var="locacao" value="#{locacaoMB.listaLocacao}" styleClass="table">
+                            <h:dataTable var="locacao" value="#{locacaoMB.listaLocacaoDisponivel}" styleClass="table">
                                 <f:facet name="header">
                                     <h:outputText value="Tabela de Locações" />
                                 </f:facet>
@@ -89,16 +89,16 @@
                                         </span>
                                     </f:facet>
                                     <div class="btn-group">
-                                        <h:commandButton value="Editar "  class="btn btn-default" action="#{locacaoMB.editarLocacao(locacao)}" />
-                                        <h:commandButton value="Remover" class="btn btn-default" action="#{locacaoMB.removerLocacao(locacao)}"/>
+                                        <h:commandButton value="Devolução "  class="btn btn-default" action="#{locacaoMB.editarDevolucao(locacao)}" />
                                     </div>
                                 </h:column>
                             </h:dataTable>
-                        </div>
+                        
                         <br/><br/>
                         <h:commandButton value="Novo Locação" class="btn btn-default" action="#{locacaoMB.novoLocacao()}"/>
-                    </h:form>
+                    </div>    
                 </div>
+                    </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

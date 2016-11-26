@@ -50,6 +50,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <h:outputLabel value="Hodometro: " for="hodometro" styleClass="control-label" class="control-label col-sm-2"/>
+                        <div class="col-sm-3">
+                            <h:inputText id="hodometro" value="#{veiculoMB.veiculoSelecionado.hodometro}"  styleClass="form-control"/> 
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <h:outputLabel value="Cor: " for="idCor" styleClass="control-label" class="control-label col-sm-2"/>
                         <div class="col-sm-3">
                             <h:inputText id="idCor" value="#{veiculoMB.veiculoSelecionado.cor}"  styleClass="form-control"/> 
@@ -83,18 +89,6 @@
                         <h:outputLabel value="Valor Livre: " for="idValorLivre" styleClass="control-label" class="control-label col-sm-2"/>
                         <div class="col-sm-3">
                             <h:inputText id="idValorDia" value="#{veiculoMB.veiculoSelecionado.valorLivre}"  styleClass="form-control"/> 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Disponivel " for="idDisponivel" styleClass="control-label" class="control-label col-sm-2"/>
-                        <div class="col-sm-3">
-                            <h:selectBooleanCheckbox required="true" value="#{veiculoMB.veiculoSelecionado.disponivel}"  styleClass="checkbox"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Veículo Ativo" for="idVeicAtivo" styleClass="control-label" class="control-label col-sm-2"/>
-                        <div class="col-sm-3">
-                            <h:selectBooleanCheckbox  value="#{veiculoMB.veiculoSelecionado.veicAtivo}"  styleClass="checkbox"/>
                         </div>
                     </div>
                     <div class="form-group">

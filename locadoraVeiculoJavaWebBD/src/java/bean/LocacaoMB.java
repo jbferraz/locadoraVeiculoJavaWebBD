@@ -28,6 +28,10 @@ import model.session.ClienteFacade;
 public class LocacaoMB implements Serializable {
 
     private Locacao locacaoSelecionado;
+    private Cliente clienteSelecionado;
+    private Veiculo veiculoSelecionado;
+    @Inject
+    private LoginMB loginMB;
     @Inject
     private VeiculoFacade veiculoFacade;
     @Inject
@@ -38,7 +42,6 @@ public class LocacaoMB implements Serializable {
 
     public LocacaoMB() {
         locacaoSelecionado = new Locacao();
-
     }
 
     /**
@@ -58,6 +61,10 @@ public class LocacaoMB implements Serializable {
     public List<Locacao> getListaLocacao() {
         return locacaoFacade.findAll();
     }
+    
+    public List<Locacao> getListaLocacaoDisponivel() {
+        return locacaoFacade.getListaLocacaoDisponivel();
+    }
 
     public List<Veiculo> getListaVeiculo() {
         return veiculoFacade.findAll();
@@ -73,19 +80,46 @@ public class LocacaoMB implements Serializable {
 
     public String novoLocacao() {
         locacaoSelecionado = new Locacao();
-        return ("formularioLocacao");
+        return ("formularioLocacaoCadastro");
     }
 
     public String adicionarLocacao() {
+        getLocacaoSelecionado().setIdCliente(getClienteSelecionado());
+        locacaoSelecionado.setStatus(Boolean.FALSE);
+        
+        veiculoSelecionado=locacaoSelecionado.getIdVeiculo();
+        
+        locacaoSelecionado.setKmRetirada(veiculoSelecionado.getHodometro());
+        veiculoSelecionado.setDisponivel(Boolean.FALSE);
+        veiculoFacade.edit(veiculoSelecionado);
+        
         locacaoFacade.create(locacaoSelecionado);
         return (this.novoLocacao());
     }
-
+    
     public String editarLocacao(Locacao l) {
         setLocacaoSelecionado(l);
-        return ("/admin/formularioLocacaoEdicao?faces-redirect=true");
+        return ("formularioLocacaoEdicao");
+    }
+    
+    public String editarDevolucao(Locacao l) {
+        setLocacaoSelecionado(l);
+        return ("formularioLocacaoEdicao");
     }
 
+    public String devolucao(){
+        //somar km e atualizar km atual do veiculo
+        veiculoSelecionado=locacaoSelecionado.getIdVeiculo();
+        int kmDevolucao = locacaoSelecionado.getKmDevolucao();
+        veiculoSelecionado.setHodometro(kmDevolucao);
+        veiculoSelecionado.setDisponivel(Boolean.TRUE);
+        veiculoFacade.edit(veiculoSelecionado);
+        locacaoSelecionado.setStatus(Boolean.TRUE);
+        
+        locacaoFacade.edit(locacaoSelecionado);
+        return ("listaLocacao");
+    }
+    
     public String atualizarLocacao() {
         locacaoFacade.edit(locacaoSelecionado);
         return ("/admin/listaLocacao?faces-redirect=true");
@@ -106,5 +140,14 @@ public class LocacaoMB implements Serializable {
     
     public SelectItem[] getItemsAvailableSelectOne() {
         return beanUtil.getSelectItems(locacaoFacade.findAll(), true);
+    }
+    
+    /**
+     * @return the loginSelecionado
+     */
+    public Cliente getClienteSelecionado() {
+        clienteSelecionado= loginMB.getClienteLogado();
+        locacaoSelecionado.setIdCliente(clienteSelecionado);
+            return clienteSelecionado;
     }
 }

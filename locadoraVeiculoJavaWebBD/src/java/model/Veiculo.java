@@ -75,6 +75,9 @@ public class Veiculo implements Serializable{
     @Column(name = "placa")
     private String placa;
     @NotNull
+    @Column(name = "hodometro")
+    private int hodometro;
+    @NotNull
     @Column(name = "valorLivre")
     private double valorLivre;
     @NotNull
@@ -313,6 +316,20 @@ public class Veiculo implements Serializable{
     @Override
     public String toString() {
         return idVeiculo + modelo + ano + portas + placa;
+    }
+
+    /**
+     * @return the hodometro
+     */
+    public int getHodometro() {
+        return hodometro;
+    }
+
+    /**
+     * @param hodometro the hodometro to set
+     */
+    public void setHodometro(int hodometro) {
+        this.hodometro = hodometro;
     }
     
 }
