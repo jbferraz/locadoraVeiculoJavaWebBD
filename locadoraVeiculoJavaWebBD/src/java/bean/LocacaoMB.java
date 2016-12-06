@@ -61,7 +61,10 @@ public class LocacaoMB implements Serializable {
     public List<Locacao> getListaLocacao() {
         return locacaoFacade.findAll();
     }
-    
+    public String selecionarVeiculo(Veiculo v){
+        veiculoSelecionado = v;
+        return (novoLocacao());
+    }
     public List<Locacao> getListaLocacaoDisponivel() {
         return locacaoFacade.getListaLocacaoDisponivel();
     }
@@ -80,11 +83,13 @@ public class LocacaoMB implements Serializable {
 
     public String novoLocacao() {
         locacaoSelecionado = new Locacao();
+        
         return ("formularioLocacaoCadastro");
     }
 
     public String adicionarLocacao() {
         getLocacaoSelecionado().setIdCliente(getClienteSelecionado());
+        
         locacaoSelecionado.setStatus(Boolean.FALSE);
         
         veiculoSelecionado=locacaoSelecionado.getIdVeiculo();

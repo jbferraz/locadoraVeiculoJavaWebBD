@@ -66,7 +66,7 @@ public class VeiculoMB implements Serializable{
     }
 
     public List<Veiculo> getListaVeicDisponivel() {
-        return listaVeicDisponivel;
+        return veiculoFacade.findAll();
     }
 
     public void setListaVeicDisponivel(List<Veiculo> listaVeicDisponivel) {
@@ -89,7 +89,10 @@ public class VeiculoMB implements Serializable{
         veiculoSelecionado = v;
         return ("/admin/formularioVeiculoEdicao?faces-redirect=true");
     }
-    
+    public String selecionarVeiculo(Veiculo v){
+        veiculoSelecionado = v;
+        return ("/admin/formularioVeiculoEdicao?faces-redirect=true");
+    }
     public String atualizarVeiculo(){
         veiculoFacade.edit(veiculoSelecionado);
         return ("/admin/listaVeiculos?faces-redirect=true");

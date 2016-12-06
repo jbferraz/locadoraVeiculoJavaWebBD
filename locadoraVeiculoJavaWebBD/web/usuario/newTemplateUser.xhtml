@@ -9,7 +9,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css"/>
-       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
         <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
     </h:head>
 
@@ -29,38 +29,14 @@
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">        
-                                <li class="active"><h:commandLink value="Home" action="/admin/index"/>
+                                <li class="active"><h:commandLink value="Home" action="/usuario/index?faces-redirect=true"/>
                                 </li>                                
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cliente
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{clienteMB.novoCliente()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaClientes?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Marca
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{marcaMB.novoMarca()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaMarcas?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categoria
-                                        <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{categoriaVeiculoMB.novoCatVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaCatVeiculos?faces-redirect=true"/></li>
-                                    </ul>
-                                </li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Veículos
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><h:commandLink value="Cadastrar" action="#{veiculoMB.novoVeiculo()}"/></li>
-                                        <li><h:commandLink value="Listar" action="/admin/listaVeiculos?faces-redirect=true"/></li>
+                                        <li><h:commandLink value="Listar" action="/usuario/listaVeiculos?faces-redirect=true"/></li>
+                                        <li><h:commandLink value="Reserva" action="/usuario/formularioLocacaoCadastro"/></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -80,7 +56,7 @@
 
         <div id="bottom">
             <ui:insert name="bottom"></ui:insert>
-            
+
         </div>
 
     </h:body>
